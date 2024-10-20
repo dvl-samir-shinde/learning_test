@@ -9,8 +9,16 @@ node {
     git branch: GITBRANCH, url: GITREPOREMOTE
   }
   
-  stage('validate')
-   sh"""
+  stage('validate') {
+     sh"""
     ${DBCLIPATH}/databricks  bundle validate --profile DEFAULT
    """
+  }
+
+  stage('deploy'){
+    sh"""
+    ${DBCLIPATH}/databricks  bundle deploy --profile DEFAULT
+    """
+  }
+  
 }
