@@ -8,6 +8,9 @@ node {
   stage('Checkout') {
     git branch: GITBRANCH, url: GITREPOREMOTE
   }
-
-
+  
+  stage('validate')
+   sh"""
+    ${DBCLIPATH}/databricks  bundle validate 
+   """
 }
