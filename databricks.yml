@@ -1,0 +1,33 @@
+# This is the configuration for the Databricks Asset Bundle my-test-bundle.
+
+bundle:
+  # name: my-test-bundle
+  name: samir_test_bundle
+
+# The main job for my-test-bundle
+resources:
+  jobs:
+    retrieve-filter-baby-names-job:  # this is the job identifier
+      name: retrieve-filter-baby-names-job  # this is the name of the job
+      job_clusters:  # this is the job cluster which is used to run the your tasks
+        - job_cluster_key: common-cluster   #
+          new_cluster:
+            spark_version: 15.4.x-scala2.12
+            node_type_id: Standard_F4
+            num_workers: 1
+      tasks:
+        - task_key: retrieve-baby-names-task
+          job_cluster_key: common-cluster
+          notebook_task:
+            notebook_path: /Workspace/Repos/awsdatabricks00@gmail.com/bundles/DAB/retrieve-baby-names.py
+        - task_key: filter-baby-names-task
+          depends_on:
+            - task_key: retrieve-baby-names-task
+          job_cluster_key: common-cluster
+          notebook_task:
+            notebook_path: /Workspace/Repos/awsdatabricks00@gmail.com/bundles/DAB/filter-baby-names.py
+
+targets:
+  UAT:
+    workspace:
+      host: https://adb-3576606825139482.2.azuredatabricks.net/
