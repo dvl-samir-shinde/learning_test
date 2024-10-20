@@ -11,6 +11,6 @@ node {
   
   stage('validate')
    sh"""
-    ${DBCLIPATH}/databricks  bundle validate 
+    ${DBCLIPATH}/databricks  bundle validate --profile DEFAULT
    """
 }
