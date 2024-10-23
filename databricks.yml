@@ -1,5 +1,5 @@
 # This is the configuration for the Databricks Asset Bundle my-test-bundle.
-
+#
 bundle:
   # name: my-test-bundle
   name: samir_test_bundle
